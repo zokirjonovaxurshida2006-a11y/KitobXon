@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KitobXon — Onlayn Kutubxona</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+<body>
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="loader-book">
+            <div class="loader-page"></div>
+            <div class="loader-page"></div>
+            <div class="loader-page"></div>
+        </div>
+        <p class="loader-text">KitobXon yuklanmoqda...</p>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">KitobXon</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#" class="nav-link active" data-page="home" onclick="showPage('home')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Bosh sahifa
+                </a>
+                <a href="#" class="nav-link" data-page="catalog" onclick="showPage('catalog')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    Katalog
+                </a>
+                <a href="#" class="nav-link" data-page="favorites" onclick="showPage('favorites')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    Sevimlilar
+                </a>
+                <a href="#" class="nav-link" data-page="stats" onclick="showPage('stats')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+                    Statistika
+                </a>
+                <a href="#" class="nav-link" data-page="garden" onclick="showPage('garden')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a9 9 0 0 1 9 9c0 4.97-4.03 9-9 9s-9-4.03-9-9a9 9 0 0 1 9-9z"/><path d="M12 8v8"/><path d="M9 12h6"/></svg>
+                    Sehrli Gul 🌸
+                </a>
+            </div>
+            <div class="nav-actions">
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Kitob qidiring..." oninput="handleSearch(this.value)">
+                    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Mavzuni o'zgartirish">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <button class="mobile-menu-btn" id="menuBtn" onclick="toggleMenu()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HOME PAGE ===== -->
+    <main class="page active" id="page-home">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="hero-particles" id="particles"></div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-badge">📖 Bilim — kuch</div>
+                <h1 class="hero-title">
+                    <span class="hero-line">Dunyoning eng yaxshi</span>
+                    <span class="hero-line gradient-text">kitoblarini o'qing</span>
+                </h1>
+                <p class="hero-subtitle">Minglab kitoblar, hikoyalar va maqolalar — barchasi bitta joyda. Istalgan qurilmada, istalgan vaqtda.</p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-lg" onclick="showPage('catalog')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        O'qishni boshlash
+                    </button>
+                    <button class="btn btn-outline btn-lg" onclick="showPage('catalog')">
+                        Katalogni ko'rish →
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-num" data-count="1500">0</span>
+                        <span class="hero-stat-label">Kitoblar</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-num" data-count="50">0</span>
+                        <span class="hero-stat-label">Janrlar</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-num" data-count="10000">0</span>
+                        <span class="hero-stat-label">O'quvchilar</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Books -->
+        <section class="section" id="trending">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">🔥 Trendda</h2>
+                        <p class="section-subtitle">Hozirda eng ko'p o'qilayotgan kitoblar</p>
+                    </div>
+                    <button class="btn btn-ghost" onclick="showPage('catalog')">Barchasini ko'rish →</button>
+                </div>
+                <div class="books-carousel" id="trendingBooks"></div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">📂 Janrlar</h2>
+                        <p class="section-subtitle">O'zingizga yoqqan janrni tanlang</p>
+                    </div>
+                </div>
+                <div class="categories-grid" id="categoriesGrid"></div>
+            </div>
+        </section>
+
+        <!-- New Arrivals -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">✨ Yangi kitoblar</h2>
+                        <p class="section-subtitle">Yaqinda qo'shilgan kitoblar</p>
+                    </div>
+                    <button class="btn btn-ghost" onclick="showPage('catalog')">Barchasini ko'rish →</button>
+                </div>
+                <div class="books-grid" id="newBooks"></div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header centered">
+                    <h2 class="section-title">Nima uchun KitobXon?</h2>
+                    <p class="section-subtitle">Bizning platformaning afzalliklari</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌙</div>
+                        <h3>Tungi rejim</h3>
+                        <p>Ko'zingizni asrang — qorong'i rejimda qulay o'qing</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔖</div>
+                        <h3>Xatcho'plar</h3>
+                        <p>Sevimli joylaringizni belgilang va istalgan vaqtda qayting</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Statistika</h3>
+                        <p>O'qish faoliyatingizni kuzatib boring</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Adaptiv dizayn</h3>
+                        <p>Har qanday qurilmada mukammal ko'rinish</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔤</div>
+                        <h3>Shrift sozlamalari</h3>
+                        <p>Shrift o'lchamini va turini o'zingizga moslab oling</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>Avto-saqlash</h3>
+                        <p>O'qish jarayoningiz avtomatik saqlanadi</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== GARDEN (SEHRLI GUL) PAGE ===== -->
+    <main class="page" id="page-garden">
+        <section class="section page-top">
+            <div class="container">
+                <div class="garden-header">
+                    <div>
+                        <div class="garden-badge">🌱 Bilim bog'i & Interaktiv o'yin</div>
+                        <h1 class="page-title">🌸 Sizning Sehrli Gulingiz</h1>
+                        <p class="page-subtitle">Har kuni kitob mutolaa qiling va gulingizni yashnating. Agar bir kun kirmasangiz — gul chanqaydi va so'liydi!</p>
+                    </div>
+                    <div class="garden-quick-actions">
+                        <button class="btn btn-primary" onclick="showPage('catalog')">
+                            📖 Kitob o'qib gulni sug'orish
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Asosiy Gul Maydoni -->
+                <div class="garden-stage-wrapper">
+                    <!-- Chap: Gul holati va ko'rsatkichlar -->
+                    <div class="garden-stats-col">
+                        <div class="flower-card flower-status-card">
+                            <div class="flower-card-header">
+                                <h3>📊 Gul holati</h3>
+                                <span class="flower-health-badge" id="flowerStatusBadge">Yashnamoqda 🌸</span>
+                            </div>
+
+                            <div class="flower-metric">
+                                <div class="metric-label">
+                                    <span>💧 Suv / Hayot darajasi</span>
+                                    <strong id="waterPercentText">100%</strong>
+                                </div>
+                                <div class="metric-bar">
+                                    <div class="metric-bar-fill water-bar-fill" id="waterBarFill" style="width: 100%;"></div>
+                                </div>
+                                <span class="metric-hint" id="waterHint">Gul to'liq sug'orilgan, ajoyib holatda!</span>
+                            </div>
+
+                            <div class="flower-metric">
+                                <div class="metric-label">
+                                    <span>🌱 O'sish darajasi (Level)</span>
+                                    <strong id="flowerLevelText">1-bosqich: Urug'</strong>
+                                </div>
+                                <div class="metric-bar">
+                                    <div class="metric-bar-fill xp-bar-fill" id="xpBarFill" style="width: 20%;"></div>
+                                </div>
+                                <span class="metric-hint" id="xpHint">Keyingi bosqichgacha: 40 XP</span>
+                            </div>
+
+                            <div class="garden-mini-stats">
+                                <div class="mini-stat-item">
+                                    <span class="mini-stat-icon">🔥</span>
+                                    <div>
+                                        <div class="mini-stat-val" id="gardenStreak">1 kun</div>
+                                        <div class="mini-stat-lbl">Ketma-ketlik</div>
+                                    </div>
+                                </div>
+                                <div class="mini-stat-item">
+                                    <span class="mini-stat-icon">📖</span>
+                                    <div>
+                                        <div class="mini-stat-val" id="todayPagesCount">0 ta</div>
+                                        <div class="mini-stat-lbl">Bugun o'qildi</div>
+                                    </div>
+                                </div>
+                                <div class="mini-stat-item">
+                                    <span class="mini-stat-icon">👑</span>
+                                    <div>
+                                        <div class="mini-stat-val" id="totalBlooms">0 marta</div>
+                                        <div class="mini-stat-lbl">To'liq gullash</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Maslahatlar va Qoidalar -->
+                        <div class="flower-card flower-rules-card">
+                            <h3>📜 Qoidalar va Sir-asrorlar</h3>
+                            <ul class="garden-rules-list">
+                                <li><strong>Kitob mutolaasi = Suv:</strong> Har safar kitob sahifasini o'qiganingizda gul 💧 +25% suv va 🌱 +10 XP oladi.</li>
+                                <li><strong>1 kun kirmasangiz = So'lish:</strong> Agar bir kun kitob o'qimasangiz suv -40% kamayib, gulingiz so'liy boshlaydi (🥀).</li>
+                                <li><strong>2+ kun kirmasangiz = Qurish:</strong> Suv 0% ga tushib butunlay qovjiraydi! Uni qayta tiriltirish uchun zudlik bilan kitob o'qishingiz kerak.</li>
+                                <li><strong>5-bosqich:</strong> Gul to'liq ochiladi va bog'ingizga abadiy durdona bo'lib qo'shiladi!</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Markaz: Gulning interaktiv vizualizatsiyasi -->
+                    <div class="garden-display-col">
+                        <div class="plant-terrarium" id="plantTerrarium">
+                            <div class="terrarium-sky">
+                                <div class="sun-glow" id="sunGlow">☀️</div>
+                                <div class="floating-butterflies" id="butterflies">🦋</div>
+                                <div class="water-drops-container" id="waterDrops"></div>
+                            </div>
+
+                            <!-- Gul illyustratsiyasi -->
+                            <div class="flower-display-box" id="flowerDisplayBox">
+                                <div class="flower-art" id="flowerArt">
+                                    <!-- Dinamik SVG / Elementlar app.js orqali boshqariladi -->
+                                </div>
+                            </div>
+
+                            <!-- Tuvak va taglik -->
+                            <div class="flower-pot-container">
+                                <div class="flower-pot">
+                                    <div class="pot-rim"></div>
+                                    <div class="pot-body">
+                                        <span class="pot-badge" id="potBadge">KitobXon 🌱</span>
+                                    </div>
+                                </div>
+                                <div class="pot-saucer"></div>
+                            </div>
+
+                            <!-- Xabar oynasi -->
+                            <div class="flower-speech-bubble" id="flowerSpeechBubble">
+                                "Salom! Men sizning bilimingizdan kuch olaman. Menga kitob o'qib suv bering! 🌿"
+                            </div>
+                        </div>
+
+                        <!-- Interaktiv Boshqaruv & Demo vositalari -->
+                        <div class="garden-controls">
+                            <button class="btn btn-primary" onclick="waterFlowerByReading()">
+                                💧 O'qish bilan sug'orish (+25%)
+                            </button>
+                            <button class="btn btn-outline" onclick="simulateMissedDay()" title="1 kun kirmaslik holatini sinab ko'rish">
+                                ⏳ 1 kun o'tkazib yuborish (So'lish)
+                            </button>
+                            <button class="btn btn-ghost" onclick="resetGardenPlant()" title="Gulni noldan qayta ekish">
+                                🔄 Qayta ekish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- O'ng: O'sish bosqichlari & Kolleksiya -->
+                    <div class="garden-milestones-col">
+                        <div class="flower-card">
+                            <h3>🏆 O'sish bosqichlari</h3>
+                            <div class="stages-timeline" id="stagesTimeline">
+                                <div class="stage-step" data-level="1">
+                                    <div class="stage-dot">🌱</div>
+                                    <div class="stage-info">
+                                        <h4>1. Urug'</h4>
+                                        <p>Bilim urug'i tuproqqa qadaldi</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="2">
+                                    <div class="stage-dot">🌿</div>
+                                    <div class="stage-info">
+                                        <h4>2. Nihol</h4>
+                                        <p>Yashil poya va ilk barglar</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="3">
+                                    <div class="stage-dot">🪴</div>
+                                    <div class="stage-info">
+                                        <h4>3. Kurtak</h4>
+                                        <p>Qalin barglar va g'uncha paydo bo'lishi</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="4">
+                                    <div class="stage-dot">🌷</div>
+                                    <div class="stage-info">
+                                        <h4>4. G'uncha</h4>
+                                        <p>Rang-barang go'zal g'uncha</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="5">
+                                    <div class="stage-dot">🌸</div>
+                                    <div class="stage-info">
+                                        <h4>5. To'liq Gul</h4>
+                                        <p>Yashnab ochilgan muattar gul</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flower-card flower-variety-card">
+                            <h3>🎨 Gul turi</h3>
+                            <div class="flower-variety-select" id="flowerVarietyList">
+                                <button class="variety-btn active" onclick="selectFlowerType('sakura')">🌸 Sakura</button>
+                                <button class="variety-btn" onclick="selectFlowerType('rose')">🌹 Atirgul</button>
+                                <button class="variety-btn" onclick="selectFlowerType('tulip')">🌷 Lola</button>
+                                <button class="variety-btn" onclick="selectFlowerType('sunflower')">🌻 Kungaboqar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== CATALOG PAGE ===== -->
+    <main class="page" id="page-catalog">
+        <section class="section page-top">
+            <div class="container">
+                <div class="catalog-header">
+                    <div>
+                        <h1 class="page-title">📚 Kitoblar katalogi</h1>
+                        <p class="page-subtitle">Barcha kitoblarni ko'ring, filterlang va tanlang</p>
+                    </div>
+                </div>
+                <div class="catalog-filters">
+                    <div class="filter-tabs" id="filterTabs"></div>
+                    <div class="filter-sort">
+                        <select id="sortSelect" onchange="applyCatalogFilters()">
+                            <option value="popular">Mashhurlik bo'yicha</option>
+                            <option value="newest">Yangilik bo'yicha</option>
+                            <option value="rating">Reyting bo'yicha</option>
+                            <option value="title">Nom bo'yicha</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="books-grid catalog-grid" id="catalogGrid"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FAVORITES PAGE ===== -->
+    <main class="page" id="page-favorites">
+        <section class="section page-top">
+            <div class="container">
+                <h1 class="page-title">❤️ Sevimli kitoblar</h1>
+                <p class="page-subtitle">Siz yoqtirgan kitoblar ro'yxati</p>
+                <div class="books-grid" id="favoritesGrid">
+                    <div class="empty-state" id="emptyFavorites">
+                        <div class="empty-icon">💔</div>
+                        <h3>Hali sevimli kitoblar yo'q</h3>
+                        <p>Kitobga ♡ bosib sevimlilar ro'yxatiga qo'shing</p>
+                        <button class="btn btn-primary" onclick="showPage('catalog')">Katalogga o'tish</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== GARDEN (SEHRLI GUL) PAGE ===== -->
+    <main class="page" id="page-garden">
+        <section class="section page-top">
+            <div class="container">
+                <div class="garden-header">
+                    <div>
+                        <div class="garden-badge">🌱 Bilim bog'i & Interaktiv o'yin</div>
+                        <h1 class="page-title">🌸 Sizning Sehrli Gulingiz</h1>
+                        <p class="page-subtitle">Har kuni kitob mutolaa qiling va gulingizni yashnating. Agar bir kun kirmasangiz — gul chanqaydi va so'liydi!</p>
+                    </div>
+                    <div class="garden-quick-actions">
+                        <button class="btn btn-primary" onclick="showPage('catalog')">
+                            📖 Kitob o'qib gulni sug'orish
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Asosiy Gul Maydoni -->
+                <div class="garden-stage-wrapper">
+                    <!-- Chap: Gul holati va ko'rsatkichlar -->
+                    <div class="garden-stats-col">
+                        <div class="flower-card flower-status-card">
+                            <div class="flower-card-header">
+                                <h3>📊 Gul holati</h3>
+                                <span class="flower-health-badge" id="flowerStatusBadge">Yashnamoqda 🌸</span>
+                            </div>
+
+                            <div class="flower-metric">
+                                <div class="metric-label">
+                                    <span>💧 Suv / Hayot darajasi</span>
+                                    <strong id="waterPercentText">100%</strong>
+                                </div>
+                                <div class="metric-bar">
+                                    <div class="metric-bar-fill water-bar-fill" id="waterBarFill" style="width: 100%;"></div>
+                                </div>
+                                <span class="metric-hint" id="waterHint">Gul to'liq sug'orilgan, ajoyib holatda!</span>
+                            </div>
+
+                            <div class="flower-metric">
+                                <div class="metric-label">
+                                    <span>🌱 O'sish darajasi (Level)</span>
+                                    <strong id="flowerLevelText">1-bosqich: Urug'</strong>
+                                </div>
+                                <div class="metric-bar">
+                                    <div class="metric-bar-fill xp-bar-fill" id="xpBarFill" style="width: 20%;"></div>
+                                </div>
+                                <span class="metric-hint" id="xpHint">Keyingi bosqichgacha: 40 XP</span>
+                            </div>
+
+                            <div class="garden-mini-stats">
+                                <div class="mini-stat-item">
+                                    <span class="mini-stat-icon">🔥</span>
+                                    <div>
+                                        <div class="mini-stat-val" id="gardenStreak">1 kun</div>
+                                        <div class="mini-stat-lbl">Ketma-ketlik</div>
+                                    </div>
+                                </div>
+                                <div class="mini-stat-item">
+                                    <span class="mini-stat-icon">📖</span>
+                                    <div>
+                                        <div class="mini-stat-val" id="todayPagesCount">0 ta</div>
+                                        <div class="mini-stat-lbl">Bugun o'qildi</div>
+                                    </div>
+                                </div>
+                                <div class="mini-stat-item">
+                                    <span class="mini-stat-icon">👑</span>
+                                    <div>
+                                        <div class="mini-stat-val" id="totalBlooms">0 marta</div>
+                                        <div class="mini-stat-lbl">To'liq gullash</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Maslahatlar va Qoidalar -->
+                        <div class="flower-card flower-rules-card">
+                            <h3>📜 Qoidalar va Sir-asrorlar</h3>
+                            <ul class="garden-rules-list">
+                                <li><strong>Kitob mutolaasi = Suv:</strong> Har safar kitob sahifasini o'qiganingizda gul 💧 +25% suv va 🌱 +10 XP oladi.</li>
+                                <li><strong>1 kun kirmasangiz = So'lish:</strong> Agar bir kun kitob o'qimasangiz suv -40% kamayib, gulingiz so'liy boshlaydi (🥀).</li>
+                                <li><strong>2+ kun kirmasangiz = Qurish:</strong> Suv 0% ga tushib butunlay qovjiraydi! Uni qayta tiriltirish uchun zudlik bilan kitob o'qishingiz kerak.</li>
+                                <li><strong>5-bosqich:</strong> Gul to'liq ochiladi va bog'ingizga abadiy durdona bo'lib qo'shiladi!</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Markaz: Gulning interaktiv vizualizatsiyasi -->
+                    <div class="garden-display-col">
+                        <div class="plant-terrarium" id="plantTerrarium">
+                            <div class="terrarium-sky">
+                                <div class="sun-glow" id="sunGlow">☀️</div>
+                                <div class="floating-butterflies" id="butterflies">🦋</div>
+                                <div class="water-drops-container" id="waterDrops"></div>
+                            </div>
+
+                            <!-- Gul illyustratsiyasi -->
+                            <div class="flower-display-box" id="flowerDisplayBox">
+                                <div class="flower-art" id="flowerArt">
+                                    <!-- Dinamik SVG / Elementlar app.js orqali boshqariladi -->
+                                </div>
+                            </div>
+
+                            <!-- Tuvak va taglik -->
+                            <div class="flower-pot-container">
+                                <div class="flower-pot">
+                                    <div class="pot-rim"></div>
+                                    <div class="pot-body">
+                                        <span class="pot-badge" id="potBadge">KitobXon 🌱</span>
+                                    </div>
+                                </div>
+                                <div class="pot-saucer"></div>
+                            </div>
+
+                            <!-- Xabar oynasi -->
+                            <div class="flower-speech-bubble" id="flowerSpeechBubble">
+                                "Salom! Men sizning bilimingizdan kuch olaman. Menga kitob o'qib suv bering! 🌿"
+                            </div>
+                        </div>
+
+                        <!-- Interaktiv Boshqaruv & Demo vositalari -->
+                        <div class="garden-controls">
+                            <button class="btn btn-primary" onclick="waterFlowerByReading()">
+                                💧 O'qish bilan sug'orish (+25%)
+                            </button>
+                            <button class="btn btn-outline" onclick="simulateMissedDay()" title="1 kun kirmaslik holatini sinab ko'rish">
+                                ⏳ 1 kun o'tkazib yuborish (So'lish)
+                            </button>
+                            <button class="btn btn-ghost" onclick="resetGardenPlant()" title="Gulni noldan qayta ekish">
+                                🔄 Qayta ekish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- O'ng: O'sish bosqichlari & Kolleksiya -->
+                    <div class="garden-milestones-col">
+                        <div class="flower-card">
+                            <h3>🏆 O'sish bosqichlari</h3>
+                            <div class="stages-timeline" id="stagesTimeline">
+                                <div class="stage-step" data-level="1">
+                                    <div class="stage-dot">🌱</div>
+                                    <div class="stage-info">
+                                        <h4>1. Urug'</h4>
+                                        <p>Bilim urug'i tuproqqa qadaldi</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="2">
+                                    <div class="stage-dot">🌿</div>
+                                    <div class="stage-info">
+                                        <h4>2. Nihol</h4>
+                                        <p>Yashil poya va ilk barglar</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="3">
+                                    <div class="stage-dot">🪴</div>
+                                    <div class="stage-info">
+                                        <h4>3. Kurtak</h4>
+                                        <p>Qalin barglar va g'uncha paydo bo'lishi</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="4">
+                                    <div class="stage-dot">🌷</div>
+                                    <div class="stage-info">
+                                        <h4>4. G'uncha</h4>
+                                        <p>Rang-barang go'zal g'uncha</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="5">
+                                    <div class="stage-dot">🌸</div>
+                                    <div class="stage-info">
+                                        <h4>5. To'liq Gul</h4>
+                                        <p>Yashnab ochilgan muattar gul</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flower-card flower-variety-card">
+                            <h3>🎨 Gul turi</h3>
+                            <div class="flower-variety-select" id="flowerVarietyList">
+                                <button class="variety-btn active" onclick="selectFlowerType('sakura')">🌸 Sakura</button>
+                                <button class="variety-btn" onclick="selectFlowerType('rose')">🌹 Atirgul</button>
+                                <button class="variety-btn" onclick="selectFlowerType('tulip')">🌷 Lola</button>
+                                <button class="variety-btn" onclick="selectFlowerType('sunflower')">🌻 Kungaboqar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== STATS PAGE ===== -->
+    <main class="page" id="page-stats">
+        <section class="section page-top">
+            <div class="container">
+                <h1 class="page-title">📊 O'qish statistikasi</h1>
+                <p class="page-subtitle">O'qish faoliyatingiz haqida batafsil ma'lumot</p>
+                <div class="stats-grid">
+                    <div class="stat-card stat-card-primary">
+                        <div class="stat-icon">📖</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statBooksRead">0</span>
+                            <span class="stat-label">Kitob o'qildi</span>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-secondary">
+                        <div class="stat-icon">📄</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statPagesRead">0</span>
+                            <span class="stat-label">Sahifa o'qildi</span>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-accent">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statTimeSpent">0 soat</span>
+                            <span class="stat-label">Vaqt sarflandi</span>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-success">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statStreak">0 kun</span>
+                            <span class="stat-label">Ketma-ket o'qish</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-details">
+                    <div class="stats-chart-card">
+                        <h3>📈 Haftalik faollik</h3>
+                        <div class="chart-bars" id="weeklyChart"></div>
+                    </div>
+                    <div class="stats-history-card">
+                        <h3>📋 Oxirgi o'qilganlar</h3>
+                        <div class="history-list" id="historyList">
+                            <div class="empty-state small">
+                                <p>Hali hech narsa o'qilmagan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== GARDEN (SEHRLI GUL) PAGE ===== -->
+    <main class="page" id="page-garden">
+        <section class="section page-top">
+            <div class="container">
+                <div class="garden-header">
+                    <div>
+                        <div class="garden-badge">🌱 Bilim bog'i & Interaktiv o'yin</div>
+                        <h1 class="page-title">🌸 Sizning Sehrli Gulingiz</h1>
+                        <p class="page-subtitle">Har kuni kitob mutolaa qiling va gulingizni yashnating. Agar bir kun kirmasangiz — gul chanqaydi va so'liydi!</p>
+                    </div>
+                    <div class="garden-quick-actions">
+                        <button class="btn btn-primary" onclick="showPage('catalog')">
+                            📖 Kitob o'qib gulni sug'orish
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Asosiy Gul Maydoni -->
+                <div class="garden-stage-wrapper">
+                    <!-- Chap: Gul holati va ko'rsatkichlar -->
+                    <div class="garden-stats-col">
+                        <div class="flower-card flower-status-card">
+                            <div class="flower-card-header">
+                                <h3>📊 Gul holati</h3>
+                                <span class="flower-health-badge" id="flowerStatusBadge">Yashnamoqda 🌸</span>
+                            </div>
+
+                            <div class="flower-metric">
+                                <div class="metric-label">
+                                    <span>💧 Suv / Hayot darajasi</span>
+                                    <strong id="waterPercentText">100%</strong>
+                                </div>
+                                <div class="metric-bar">
+                                    <div class="metric-bar-fill water-bar-fill" id="waterBarFill" style="width: 100%;"></div>
+                                </div>
+                                <span class="metric-hint" id="waterHint">Gul to'liq sug'orilgan, ajoyib holatda!</span>
+                            </div>
+
+                            <div class="flower-metric">
+                                <div class="metric-label">
+                                    <span>🌱 O'sish darajasi (Level)</span>
+                                    <strong id="flowerLevelText">1-bosqich: Urug'</strong>
+                                </div>
+                                <div class="metric-bar">
+                                    <div class="metric-bar-fill xp-bar-fill" id="xpBarFill" style="width: 20%;"></div>
+                                </div>
+                                <span class="metric-hint" id="xpHint">Keyingi bosqichgacha: 40 XP</span>
+                            </div>
+
+                            <div class="garden-mini-stats">
+                                <div class="mini-stat-item">
+                                    <span class="mini-stat-icon">🔥</span>
+                                    <div>
+                                        <div class="mini-stat-val" id="gardenStreak">1 kun</div>
+                                        <div class="mini-stat-lbl">Ketma-ketlik</div>
+                                    </div>
+                                </div>
+                                <div class="mini-stat-item">
+                                    <span class="mini-stat-icon">📖</span>
+                                    <div>
+                                        <div class="mini-stat-val" id="todayPagesCount">0 ta</div>
+                                        <div class="mini-stat-lbl">Bugun o'qildi</div>
+                                    </div>
+                                </div>
+                                <div class="mini-stat-item">
+                                    <span class="mini-stat-icon">👑</span>
+                                    <div>
+                                        <div class="mini-stat-val" id="totalBlooms">0 marta</div>
+                                        <div class="mini-stat-lbl">To'liq gullash</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Maslahatlar va Qoidalar -->
+                        <div class="flower-card flower-rules-card">
+                            <h3>📜 Qoidalar va Sir-asrorlar</h3>
+                            <ul class="garden-rules-list">
+                                <li><strong>Kitob mutolaasi = Suv:</strong> Har safar kitob sahifasini o'qiganingizda gul 💧 +25% suv va 🌱 +10 XP oladi.</li>
+                                <li><strong>1 kun kirmasangiz = So'lish:</strong> Agar bir kun kitob o'qimasangiz suv -40% kamayib, gulingiz so'liy boshlaydi (🥀).</li>
+                                <li><strong>2+ kun kirmasangiz = Qurish:</strong> Suv 0% ga tushib butunlay qovjiraydi! Uni qayta tiriltirish uchun zudlik bilan kitob o'qishingiz kerak.</li>
+                                <li><strong>5-bosqich:</strong> Gul to'liq ochiladi va bog'ingizga abadiy durdona bo'lib qo'shiladi!</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Markaz: Gulning interaktiv vizualizatsiyasi -->
+                    <div class="garden-display-col">
+                        <div class="plant-terrarium" id="plantTerrarium">
+                            <div class="terrarium-sky">
+                                <div class="sun-glow" id="sunGlow">☀️</div>
+                                <div class="floating-butterflies" id="butterflies">🦋</div>
+                                <div class="water-drops-container" id="waterDrops"></div>
+                            </div>
+
+                            <!-- Gul illyustratsiyasi -->
+                            <div class="flower-display-box" id="flowerDisplayBox">
+                                <div class="flower-art" id="flowerArt">
+                                    <!-- Dinamik SVG / Elementlar app.js orqali boshqariladi -->
+                                </div>
+                            </div>
+
+                            <!-- Tuvak va taglik -->
+                            <div class="flower-pot-container">
+                                <div class="flower-pot">
+                                    <div class="pot-rim"></div>
+                                    <div class="pot-body">
+                                        <span class="pot-badge" id="potBadge">KitobXon 🌱</span>
+                                    </div>
+                                </div>
+                                <div class="pot-saucer"></div>
+                            </div>
+
+                            <!-- Xabar oynasi -->
+                            <div class="flower-speech-bubble" id="flowerSpeechBubble">
+                                "Salom! Men sizning bilimingizdan kuch olaman. Menga kitob o'qib suv bering! 🌿"
+                            </div>
+                        </div>
+
+                        <!-- Interaktiv Boshqaruv & Demo vositalari -->
+                        <div class="garden-controls">
+                            <button class="btn btn-primary" onclick="waterFlowerByReading()">
+                                💧 O'qish bilan sug'orish (+25%)
+                            </button>
+                            <button class="btn btn-outline" onclick="simulateMissedDay()" title="1 kun kirmaslik holatini sinab ko'rish">
+                                ⏳ 1 kun o'tkazib yuborish (So'lish)
+                            </button>
+                            <button class="btn btn-ghost" onclick="resetGardenPlant()" title="Gulni noldan qayta ekish">
+                                🔄 Qayta ekish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- O'ng: O'sish bosqichlari & Kolleksiya -->
+                    <div class="garden-milestones-col">
+                        <div class="flower-card">
+                            <h3>🏆 O'sish bosqichlari</h3>
+                            <div class="stages-timeline" id="stagesTimeline">
+                                <div class="stage-step" data-level="1">
+                                    <div class="stage-dot">🌱</div>
+                                    <div class="stage-info">
+                                        <h4>1. Urug'</h4>
+                                        <p>Bilim urug'i tuproqqa qadaldi</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="2">
+                                    <div class="stage-dot">🌿</div>
+                                    <div class="stage-info">
+                                        <h4>2. Nihol</h4>
+                                        <p>Yashil poya va ilk barglar</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="3">
+                                    <div class="stage-dot">🪴</div>
+                                    <div class="stage-info">
+                                        <h4>3. Kurtak</h4>
+                                        <p>Qalin barglar va g'uncha paydo bo'lishi</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="4">
+                                    <div class="stage-dot">🌷</div>
+                                    <div class="stage-info">
+                                        <h4>4. G'uncha</h4>
+                                        <p>Rang-barang go'zal g'uncha</p>
+                                    </div>
+                                </div>
+                                <div class="stage-step" data-level="5">
+                                    <div class="stage-dot">🌸</div>
+                                    <div class="stage-info">
+                                        <h4>5. To'liq Gul</h4>
+                                        <p>Yashnab ochilgan muattar gul</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flower-card flower-variety-card">
+                            <h3>🎨 Gul turi</h3>
+                            <div class="flower-variety-select" id="flowerVarietyList">
+                                <button class="variety-btn active" onclick="selectFlowerType('sakura')">🌸 Sakura</button>
+                                <button class="variety-btn" onclick="selectFlowerType('rose')">🌹 Atirgul</button>
+                                <button class="variety-btn" onclick="selectFlowerType('tulip')">🌷 Lola</button>
+                                <button class="variety-btn" onclick="selectFlowerType('sunflower')">🌻 Kungaboqar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== READER PAGE (PRO KITOB VARAQLAGICH) ===== -->
+    <main class="page" id="page-reader">
+        <div class="reader-toolbar" id="readerToolbar">
+            <div class="reader-toolbar-left">
+                <button class="reader-btn" onclick="closeReader()" title="Chiqish (Esc)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                </button>
+                <div class="reader-book-info">
+                    <span class="reader-book-title" id="readerBookTitle"></span>
+                    <span class="reader-book-author" id="readerBookAuthor"></span>
+                </div>
+            </div>
+            <div class="reader-toolbar-center">
+                <span class="reader-progress-text" id="readerProgressText">Sahifa 1 / 1</span>
+            </div>
+            <div class="reader-toolbar-right">
+                <button class="reader-btn" id="soundToggleBtn" onclick="togglePageSound()" title="Varaqlash ovozi">
+                    🔊
+                </button>
+                <button class="reader-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="Xatcho'p qo'yish">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                </button>
+                <button class="reader-btn" onclick="toggleReaderSettings()" title="Sozlamalar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Reader Settings Panel -->
+        <div class="reader-settings" id="readerSettings">
+            <div class="settings-group">
+                <label>Shrift o'lchami</label>
+                <div class="settings-control">
+                    <button class="settings-btn" onclick="changeFontSize(-2)">A−</button>
+                    <span id="fontSizeDisplay">18px</span>
+                    <button class="settings-btn" onclick="changeFontSize(2)">A+</button>
+                </div>
+            </div>
+            <div class="settings-group">
+                <label>Shrift turi</label>
+                <div class="settings-control">
+                    <select id="fontFamilySelect" onchange="changeFontFamily(this.value)">
+                        <option value="'Merriweather', serif">Merriweather (Klassik)</option>
+                        <option value="'Inter', sans-serif">Inter (Zamonaviy)</option>
+                        <option value="'Georgia', serif">Georgia (Kitobiy)</option>
+                        <option value="monospace">Monospace (Tizimli)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="settings-group">
+                <label>Satr oralig'i</label>
+                <div class="settings-control">
+                    <input type="range" min="1.4" max="2.4" step="0.1" value="1.8" id="lineHeightRange" oninput="changeLineHeight(this.value)">
+                </div>
+            </div>
+            <div class="settings-group">
+                <label>O'qish rejimi</label>
+                <div class="settings-control reading-modes">
+                    <button class="mode-btn mode-light active" onclick="setReadingMode('light')" title="Oq qog'oz">☀️</button>
+                    <button class="mode-btn mode-sepia" onclick="setReadingMode('sepia')" title="Tarixiy Sepia">📜</button>
+                    <button class="mode-btn mode-dark" onclick="setReadingMode('dark')" title="Tungi qorong'i">🌙</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ASOSIY KITOB VA VARAQLASH MAYDONI -->
+        <div class="book-reader-stage" id="bookReaderStage">
+            <!-- Chap Varaqlash Tugmasi (Suzuvchi) -->
+            <button class="floating-page-btn float-prev-btn" id="floatPrevBtn" onclick="prevPage()" title="Oldingi bet (←)">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                <span class="float-btn-label">Oldingi</span>
+            </button>
+
+            <!-- Chap Varaqlash Sezuvchan Hududi -->
+            <div class="page-edge-zone edge-left" onclick="prevPage()" title="Oldingi sahifaga varaqlash"></div>
+
+            <!-- Haqiqiy Kitob Varaqlari (Book Spread) -->
+            <div class="book-sheet-wrapper" id="bookSheetWrapper">
+                <div class="book-sheet" id="bookSheet">
+                    <div class="book-sheet-header">
+                        <span class="sheet-header-title" id="sheetHeaderTitle"></span>
+                        <span class="sheet-header-chapter" id="sheetHeaderChapter">1-bob</span>
+                    </div>
+
+                    <div class="book-page-body" id="readerContent">
+                        <!-- Sahifa matni bu yerga yuklanadi -->
+                    </div>
+
+                    <div class="book-sheet-footer">
+                        <span class="sheet-footer-brand">KitobXon</span>
+                        <span class="sheet-footer-page" id="sheetFooterPage">— 1-sahifa —</span>
+                        <span class="sheet-footer-progress" id="sheetFooterProgress">0%</span>
+                    </div>
+
+                    <!-- Sahifaning buklanish soyasi (Spine Shadow Effect) -->
+                    <div class="sheet-spine-shadow"></div>
+                </div>
+            </div>
+
+            <!-- O'ng Varaqlash Sezuvchan Hududi -->
+            <div class="page-edge-zone edge-right" onclick="nextPage()" title="Keyingi sahifaga varaqlash"></div>
+
+            <!-- O'ng Varaqlash Tugmasi (Suzuvchi) -->
+            <button class="floating-page-btn float-next-btn" id="floatNextBtn" onclick="nextPage()" title="Keyingi bet (→)">
+                <span class="float-btn-label">Keyingi</span>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+
+        <!-- Pastki Boshqaruv Paneli -->
+        <div class="reader-nav">
+            <button class="reader-nav-btn" id="prevPageBtn" onclick="prevPage()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                Oldingi bet
+            </button>
+            <div class="reader-progress-bar">
+                <div class="progress-track">
+                    <div class="progress-fill" id="readerProgressFill"></div>
+                </div>
+            </div>
+            <button class="reader-nav-btn" id="nextPageBtn" onclick="nextPage()">
+                Keyingi bet
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </main>
+
+    <!-- ===== BOOK DETAIL MODAL ===== -->
+    <div class="modal-overlay" id="bookModal">
+        <div class="modal" id="bookModalContent">
+            <button class="modal-close" onclick="closeBookModal()">✕</button>
+            <div class="modal-body">
+                <div class="modal-cover" id="modalCover"></div>
+                <div class="modal-info">
+                    <div class="modal-genre" id="modalGenre"></div>
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <p class="modal-author" id="modalAuthor"></p>
+                    <div class="modal-rating" id="modalRating"></div>
+                    <p class="modal-desc" id="modalDesc"></p>
+                    <div class="modal-meta">
+                        <span id="modalPages"></span>
+                        <span id="modalYear"></span>
+                        <span id="modalLang"></span>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-primary btn-lg" id="modalReadBtn" onclick="startReading()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            O'qishni boshlash
+                        </button>
+                        <button class="btn btn-outline btn-lg" id="modalFavBtn" onclick="toggleFavoriteFromModal()">
+                            ♡ Sevimlilarga
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <footer class="footer" id="mainFooter">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">📚</span>
+                    <span class="logo-text">KitobXon</span>
+                    <p>Bilimga olib boruvchi yo'l</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" onclick="showPage('home')">Bosh sahifa</a>
+                    <a href="#" onclick="showPage('catalog')">Katalog</a>
+                    <a href="#" onclick="showPage('favorites')">Sevimlilar</a>
+                    <a href="#" onclick="showPage('stats')">Statistika</a>
+                    <a href="#" onclick="showPage('garden')">Sehrli Gul 🌸</a>
+                </div>
+                <div class="footer-copy">
+                    <p>© 2026 KitobXon. Barcha huquqlar himoyalangan.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="books-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
